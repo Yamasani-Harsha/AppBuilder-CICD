@@ -29,7 +29,7 @@ async function main (params) {
 
         const response = {
             statusCode: 200,
-            body: `Hi, ${params.NAME} I am here and I added the updated message!`
+            body: `Hi, ${params.NAME} I am here and I added the updated message! By the way, How are you!`
         }
 
         // log the response status code
