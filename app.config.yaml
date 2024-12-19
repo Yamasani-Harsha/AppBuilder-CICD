@@ -31,6 +31,7 @@ application:
             runtime: nodejs:18
             inputs:
               LOG_LEVEL: debug
+              NAME: $SAMPLE_NAME
             annotations:
               require-adobe-auth: false
               final: true
