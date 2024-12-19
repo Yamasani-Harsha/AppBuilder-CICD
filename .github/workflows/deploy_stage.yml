@@ -40,14 +40,14 @@ jobs:
           SCOPES: ${{ secrets.SCOPES_STAGE }}
       - name: Build
         env:
-          AIO_RUNTIME_NAMESPACE: ${{ secrets.AIO_RUNTIME_NAMESPACE_STAGE }}
+          AIO_RUNTIME_NAMESPACE: ${{ vars.AIO_RUNTIME_NAMESPACE_STAGE }}
         uses: adobe/aio-apps-action@3.3.0
         with:
           os: ${{ matrix.os }}
           command: build
       - name: Deploy
         env:
-          AIO_RUNTIME_NAMESPACE: ${{ secrets.AIO_RUNTIME_NAMESPACE_STAGE }}
+          AIO_RUNTIME_NAMESPACE: ${{ vars.AIO_RUNTIME_NAMESPACE_STAGE }}
           AIO_RUNTIME_AUTH: ${{ secrets.AIO_RUNTIME_AUTH_STAGE }}
           AIO_PROJECT_ID: ${{ secrets.AIO_PROJECT_ID_STAGE }}
           AIO_PROJECT_NAME: ${{ secrets.AIO_PROJECT_NAME_STAGE }}
