@@ -33,6 +33,23 @@ jobs:
         with:
           os: ${{ matrix.os }}
           version: 10.x.x
+      - name: Run Log Forwarding Command
+        if: ${{ env.ENABLE_LOG_FORWARDING == 'true' }}
+        run: |
+          echo "Log Forwarding flag is enabled, proceeding with the task..."
+          URL="${{ secrets.LOG_FORWARDING_URL }}"
+          PASSWORD="${{ secrets.LOG_FORWARDING_PASSWORD }}"
+
+          expect <<EOF
+          spawn aio app config set log-forwarding
+          expect "select log forwarding destination:"
+          send "New Relic\r"
+          expect "base URI:"
+          send "$URL\r"
+          expect "license key:"
+          send "$PASSWORD\r"
+          expect eof
+          EOF
       - name: Auth
         uses: adobe/aio-apps-action@3.3.0
         with:
@@ -44,23 +61,6 @@ jobs:
           TECHNICALACCOUNTEMAIL: ${{ secrets.TECHNICALACCEMAIL_STAGE }}
           IMSORGID: ${{ secrets.IMSORGID_STAGE }}
           SCOPES: ${{ secrets.SCOPES_STAGE }}
-      - name: Run Log Forwarding Command
-        if: ${{ env.ENABLE_LOG_FORWARDING == 'true' }}
-        run: |
-          echo "Log Forwarding flag is enabled, proceeding with the task..."
-          URL="${{ secrets.LOG_FORWARDING_URL }}"
-          PASSWORD="${{ secrets.LOG_FORWARDING_PASSWORD }}"
-
-          expect <<EOF
-          spawn aio app config set log-forwarding
-          expect "? select log forwarding destination"
-          send "New Relic\r"
-          expect "? base URI"
-          send "$URL\r"
-          expect "? license key"
-          send "$PASSWORD\r"
-          expect eof
-          EOF
       - name: Build
         env:
           AIO_RUNTIME_NAMESPACE: ${{ vars.AIO_RUNTIME_NAMESPACE_STAGE }}
