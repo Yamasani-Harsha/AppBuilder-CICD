@@ -36,7 +36,7 @@ jobs:
           PASSWORD="${{ secrets.LOG_FORWARDING_PASSWORD }}"
           
           expect <<EOF
-          spawn aio app config set log-forwarding
+          spawn config set log-forwarding
           expect "select log forwarding destination:"
           send "New Relic\r"
           expect "base URI:"
