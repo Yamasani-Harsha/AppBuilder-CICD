@@ -50,9 +50,6 @@ jobs:
           send "$PASSWORD\r"
           expect eof
           EOF
-        with:
-          command: ''
-          os: ${{ matrix.os }}
       - name: Auth
         uses: adobe/aio-apps-action@3.3.0
         with:
