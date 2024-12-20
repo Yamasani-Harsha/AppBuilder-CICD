@@ -22,6 +22,27 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install
         run: npm i
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y expect
+      - name: Run Log Forwarding Command
+        if: ${{ secrets.ENABLE_LOG_FORWARDING != '' }}
+        run: |
+          echo "Log Forwarding flag is enabled, proceeding with the task..."
+          URL="${{ secrets.LOG_FORWARDING_URL }}"
+          PASSWORD="${{ secrets.LOG_FORWARDING_PASSWORD }}"
+          
+          expect <<EOF
+          spawn aio app config set log-forwarding
+          expect "select log forwarding destination:"
+          send "New Relic\r"
+          expect "base URI:"
+          send "$URL\r"
+          expect "license key:"
+          send "$PASSWORD\r"
+          expect eof
+          EOF
       - name: Setup CLI
         uses: adobe/aio-cli-setup-action@1.3.0
         with:
