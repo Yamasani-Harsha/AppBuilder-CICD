@@ -50,9 +50,9 @@ jobs:
           expect <<EOF
           spawn aio app config set log-forwarding
           expect "select log forwarding destination" {
-            send "\033[B"  # Down arrow to 2nd option
-            send "\033[B"  # Down arrow to 3rd option
-            send "\033[B"  # Down arrow to 4th option
+            send {\033[B}  # Down arrow to 2nd option
+            send {\033[B}  # Down arrow to 3rd option
+            send {\033[B}  # Down arrow to 4th option
           }
           expect "base URI" { send "${{ secrets.NEW_RELIC_BASE_URI }}\r" }
           expect "license key" { send "${{ secrets.NEW_RELIC_LICENSE_KEY }}\r" }
