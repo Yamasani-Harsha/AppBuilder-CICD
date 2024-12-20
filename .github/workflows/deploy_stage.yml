@@ -27,7 +27,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y expect
       - name: Run Log Forwarding Command
-        if: ${{ secrets.ENABLE_LOG_FORWARDING != '' }}
+        if: ${{ secrets.ENABLE_LOG_FORWARDING == true }}
         run: |
           echo "Log Forwarding flag is enabled, proceeding with the task..."
           URL="${{ secrets.LOG_FORWARDING_URL }}"
