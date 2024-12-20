@@ -42,11 +42,11 @@ jobs:
 
           expect <<EOF
           spawn aio app config set log-forwarding
-          expect "select log forwarding destination:"
+          expect "? select log forwarding destination"
           send "New Relic\r"
-          expect "base URI:"
+          expect "? base URI"
           send "$URL\r"
-          expect "license key:"
+          expect "? license key"
           send "$PASSWORD\r"
           expect eof
           EOF
