@@ -45,15 +45,6 @@ jobs:
           IMSORGID: ${{ secrets.IMSORGID_STAGE }}
           SCOPES: ${{ secrets.SCOPES_STAGE }}
       - name: Run Log Forwarding Command
-        env:
-          AIO_RUNTIME_NAMESPACE: ${{ vars.AIO_RUNTIME_NAMESPACE_STAGE }}
-          AIO_RUNTIME_AUTH: ${{ secrets.AIO_RUNTIME_AUTH_STAGE }}
-          AIO_PROJECT_ID: ${{ secrets.AIO_PROJECT_ID_STAGE }}
-          AIO_PROJECT_NAME: ${{ secrets.AIO_PROJECT_NAME_STAGE }}
-          AIO_PROJECT_ORG_ID: ${{ vars.AIO_PROJECT_ORG_ID_STAGE }}
-          AIO_PROJECT_WORKSPACE_ID: ${{ secrets.AIO_PROJECT_WORKSPACE_ID_STAGE }}
-          AIO_PROJECT_WORKSPACE_NAME: ${{ secrets.AIO_PROJECT_WORKSPACE_NAME_STAGE }}
-          AIO_PROJECT_WORKSPACE_DETAILS_SERVICES: ${{ secrets.AIO_PROJECT_WORKSPACE_DETAILS_SERVICES_STAGE }}
         if: ${{ env.ENABLE_LOG_FORWARDING == 'true' }}
         run: |
           echo "Log Forwarding flag is enabled, proceeding with the task..."
